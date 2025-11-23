@@ -1,6 +1,6 @@
 /* INFO DFT - my implementation of the Discrete Fourier Transform
-* the definition of the DFT is X[k] = Σ^N-1_n=0 x[n] e^(-i 2π/N kn) */
-use std::f64::consts::PI;
+* NOTE the definition of the DFT is X[k] = Σ^N-1_n=0 x[n] e^(-i 2π/N kn) */
+use std::{f64::consts::PI, task::RawWakerVTable};
 
 fn e_power_i_pi_x(input: f64) -> (f64, f64) {
     ((input * PI).cos(), (input * PI).sin())
@@ -32,6 +32,16 @@ fn dft(input: Vec<(f64, f64)>) -> Vec<(f64, f64)> {
 fn main() {
     let result = dft(vec![(1., 0.), (1., 0.), (1., 0.), (1., 0.)]);
     for (k, (real, imag)) in result.iter().enumerate() {
-        println!("{} + {}i", real, imag);
+        // INFO fixing artifacts
+        let mut real = (real * 32.).round() / 32.;
+        let mut imag = (imag * 32.).round() / 32.;
+
+        if real == -0 as f64 {
+            real = 0.;
+        } else if imag == -0 as f64 {
+            imag = 0.;
+        }
+
+        println!("{} + i{}", real, imag);
     }
 }
