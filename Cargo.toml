@@ -7,4 +7,8 @@ edition = "2024"
 name = "DFT"
 path = "src/DFT.rs"
 
+[[bin]]
+name = "FFT"
+path = "src/FFT.rs"
+
 [dependencies]
