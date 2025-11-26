@@ -25,9 +25,9 @@ fn dft(input: Vec<(f64, f64)>) -> Vec<(f64, f64)> {
             n += 1;
         }
 
-        // INFO Removing floating-point arithmetic errors
-        sum.0 = (sum.0 * 32.).round() / 32.;
-        sum.1 = (sum.1 * 32.).round() / 32.;
+        // INFO Removing floating-point arithmetic errors, commented out because of print and scope issues
+        /*sum.0 = (sum.0 * 32.).round() / 32.;
+        sum.1 = (sum.1 * 32.).round() / 32.; */
 
         output[k] = sum;
     }
@@ -36,12 +36,16 @@ fn dft(input: Vec<(f64, f64)>) -> Vec<(f64, f64)> {
 
 fn main() {
     let result = dft(vec![(1., 0.), (1., 0.), (1., 0.), (1., 0.)]);
-    for (k, (real, imag)) in result.iter().enumerate() {
-        if real == &(-0 as f64) {
-            let real = &0.;
+    for (_k, (real, imag)) in result.iter().enumerate() {
+        let mut real = (real * 32.).round() / 32.;
+        let mut imag = (imag * 32.).round() / 32.;
+
+        // INFO This is optional and only for output clarity
+        if real == -0 as f64 {
+            real = 0.;
         }
-        if imag == &(-0 as f64) {
-            let imag = &0.;
+        if imag == -0 as f64 {
+            imag = 0.;
         }
 
         println!("{} + i{}", real, imag);
