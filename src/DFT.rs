@@ -35,7 +35,8 @@ fn dft(input: Vec<(f64, f64)>) -> Vec<(f64, f64)> {
 }
 
 fn main() {
-    let result = dft(vec![(1., 0.), (1., 0.), (1., 0.), (1., 0.)]);
+    let input = vec![(1., 0.), (1., 0.), (1., 0.), (1., 0.)];
+    let result = dft(input);
     for (_k, (real, imag)) in result.iter().enumerate() {
         let mut real = (real * 32.).round() / 32.;
         let mut imag = (imag * 32.).round() / 32.;
