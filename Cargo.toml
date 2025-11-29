@@ -11,4 +11,9 @@ path = "src/DFT.rs"
 name = "FFT"
 path = "src/FFT.rs"
 
+[[bin]]
+name = "TEST"
+path = "src/image_test.rs"
+
 [dependencies]
+image = "0.25.9"
